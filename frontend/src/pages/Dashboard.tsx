@@ -4,11 +4,22 @@ import { Loader, ErrorMessage, EmptyState } from '../components/UI/Basic';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell, PieChart, Pie, Legend } from 'recharts';
 import { Link } from 'react-router-dom';
 
+const MIN_N = 10;
+
+function getNivel(score: number | null) {
+  if (score == null || isNaN(score) || score === 0) return { cls: 'nd', txt: 'Sin puntaje' };
+  if (score >= 80) return { cls: 'ex', txt: 'Excelente' };
+  if (score >= 60) return { cls: 'bu', txt: 'Bueno' };
+  if (score >= 40) return { cls: 're', txt: 'Regular' };
+  return { cls: 'ba', txt: 'Bajo' };
+}
+
 export const Dashboard: React.FC = () => {
   const [teachers, setTeachers] = useState<TeacherScoreResponse[]>([]);
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<'score' | 'dudosos' | 'n' | 'name'>('score');
 
   useEffect(() => {
     const loadData = async () => {
@@ -35,6 +46,16 @@ export const Dashboard: React.FC = () => {
 
   const avgScore = teachers.reduce((a, b) => a + b.general_score, 0) / (teachers.length || 1);
   const bestTeacher = [...teachers].sort((a, b) => b.general_score - a.general_score)[0];
+
+  const sortedTeachers = [...teachers].sort((a, b) => {
+    if (sortBy === 'name') return (a.display_name || a.name).localeCompare(b.display_name || b.name);
+    if (sortBy === 'dudosos') return (b.pending_reviews_count || 0) - (a.pending_reviews_count || 0);
+    if (sortBy === 'n') return (b.total_valid_pairs || 0) - (a.total_valid_pairs || 0);
+    return (b.general_score || 0) - (a.general_score || 0);
+  });
+
+  const provCount = teachers.filter(t => (t.total_valid_pairs || 0) < MIN_N || t.ranking_category !== 'OFICIAL_PRINCIPAL').length;
+  const totalDudosos = teachers.reduce((acc, t) => acc + (t.pending_reviews_count || 0), 0);
 
   const chartData = teachers.map(t => ({
     name: t.display_name || t.name,
@@ -109,7 +130,7 @@ export const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      <section className="grid">
+      <section className="grid" style={{ marginBottom: '32px' }}>
         <div className="panel c7">
           <h3>Ranking General</h3>
           <p className="sub">Puntuación global por docente.</p>
@@ -147,42 +168,106 @@ export const Dashboard: React.FC = () => {
             </ResponsiveContainer>
           </div>
         </div>
+      </section>
 
-        <div className="c12">
-          <h3 style={{ marginTop: '10px' }}>Desempeño por Docente</h3>
-          <div className="grid">
-            {teachers.map(teacher => {
-              const name = teacher.display_name || teacher.name || 'Docente';
-              return (
-                <div key={teacher.teacher_id} className="panel c4">
-                  <h3 style={{ marginBottom: '0.5rem' }}>{name}</h3>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                    <span style={{ fontSize: '2.5rem', fontFamily: 'Sora', fontWeight: 700, color: teacher.has_insufficient_sample ? 'var(--wa)' : 'var(--ok)' }}>
-                      {teacher.general_score.toFixed(1)}
-                    </span>
-                    <span style={{ color: 'var(--mut)', fontSize: '0.875rem', alignSelf: 'center', textAlign: 'right', lineHeight: 1.2 }}>
-                      {teacher.total_valid_pairs || teacher.total_comments || 0} evals<br />
-                      n={teacher.total_valid_pairs || teacher.score_details?.n || 0}
-                    </span>
-                  </div>
-
-                  <div style={{ fontSize: '13px', marginBottom: '14px', color: 'var(--mut)' }}>
-                    Dudosos pendientes: <b style={{ color: 'var(--ink)' }}>{teacher.pending_reviews_count || teacher.score_details?.pending_review || 0}</b>
-                  </div>
-
-                  {teacher.has_insufficient_sample && (
-                    <div style={{ fontSize: '12.5px', background: 'rgba(245,158,11,0.16)', color: '#B7791F', padding: '4px 8px', borderRadius: '4px', marginBottom: '14px', fontWeight: 600 }}>
-                      Muestra insuficiente ({teacher.ranking_category})
-                    </div>
-                  )}
-
-                  <Link to={`/teacher/${teacher.teacher_id}`} className="btn g" style={{ width: '100%', textAlign: 'center', display: 'block' }}>
-                    Ver Detalles
-                  </Link>
-                </div>
-              );
-            })}
+      {/* SECCIÓN TARJETAS DE DOCENTES CON EL NUEVO DISEÑO */}
+      <section>
+        <div className="dc-head">
+          <div>
+            <h2>Desempeño por docente</h2>
+            <p>{teachers.length} docentes · {provCount} con puntaje provisional · {totalDudosos} dudosos por revisar</p>
           </div>
+          <select value={sortBy} onChange={e => setSortBy(e.target.value as any)} aria-label="Ordenar docentes">
+            <option value="score">Ordenar por puntaje</option>
+            <option value="dudosos">Más dudosos pendientes</option>
+            <option value="n">Más evaluaciones</option>
+            <option value="name">Nombre (A–Z)</option>
+          </select>
+        </div>
+
+        <div className="dc-legend">
+          <span><i style={{ background: 'var(--ex)' }}></i>Excelente (80–100)</span>
+          <span><i style={{ background: 'var(--bu)' }}></i>Bueno (60–79)</span>
+          <span><i style={{ background: 'var(--re)' }}></i>Regular (40–59)</span>
+          <span><i style={{ background: 'var(--ba)' }}></i>Bajo (0–39)</span>
+          <span><i style={{ background: 'var(--nd)' }}></i>Sin puntaje</span>
+        </div>
+
+        <div className="dc-grid">
+          {sortedTeachers.map(teacher => {
+            const fullName = teacher.display_name || teacher.name || 'Docente';
+            const m = fullName.match(/^(Dr\.|Dra\.|Prof\.|Ing\.|Lic\.|Mg\.)\s+/i);
+            const titulo = m ? m[1] : '';
+            const limpio = fullName.replace(/^(Dr\.|Dra\.|Prof\.|Ing\.|Lic\.|Mg\.)\s+/i, '');
+            const ini = limpio.split(' ').slice(0, 2).map(x => x[0]).join('').toUpperCase() || 'D';
+            const score = teacher.general_score > 0 ? teacher.general_score : null;
+            const lv = getNivel(score);
+            const n = teacher.total_valid_pairs || 0;
+            const dudosos = teacher.pending_reviews_count || 0;
+            const prov = n < MIN_N || teacher.ranking_category !== 'OFICIAL_PRINCIPAL';
+            const faltan = Math.max(0, MIN_N - n);
+            const pct = Math.min(100, (n / MIN_N) * 100);
+
+            return (
+              <article key={teacher.teacher_id} className={`dc-card ${lv.cls}`}>
+                <div className="dc-top">
+                  <div className="dc-av">{ini}</div>
+                  <div>
+                    <div className="dc-name">{limpio}</div>
+                    <div className="dc-role">{titulo || 'Docente'}</div>
+                  </div>
+                  <span className={`dc-badge ${prov ? 'pv' : 'ok'}`}>{prov ? 'Provisional' : 'Confiable'}</span>
+                </div>
+
+                <div>
+                  <div className="dc-score">
+                    <b>{score == null ? '—' : score.toFixed(1)}</b><small>/ 100</small>
+                    <span className="dc-level">{lv.txt}</span>
+                  </div>
+                  <div className="dc-bar" role="img" aria-label={`Puntaje ${score ?? 'sin dato'} de 100`}>
+                    <i style={{ width: `${score ?? 0}%` }}></i>
+                    <u style={{ left: '40%' }}></u>
+                    <u style={{ left: '60%' }}></u>
+                    <u style={{ left: '80%' }}></u>
+                  </div>
+                </div>
+
+                <div className="dc-stats">
+                  <div className="dc-stat"><span>Evaluaciones</span><b>{n}</b></div>
+                  <div className={`dc-stat ${dudosos > 0 ? 'warn' : ''}`}><span>Dudosos pendientes</span><b>{dudosos}</b></div>
+                </div>
+
+                <div className={`dc-conf ${prov ? '' : 'full'}`}>
+                  {prov ? (
+                    <>Faltan <b style={{ color: 'var(--ink)' }}>{faltan}</b> evaluaciones para que el puntaje sea confiable.</>
+                  ) : (
+                    <>Muestra suficiente para un puntaje confiable.</>
+                  )}
+                  <div className="t"><i style={{ width: `${pct}%` }}></i></div>
+                  {n} de {MIN_N} evaluaciones mínimas
+                </div>
+
+                {teacher.aspects && teacher.aspects.length > 0 && (
+                  <div className="dc-crit">
+                    {teacher.aspects.slice(0, 3).map(c => (
+                      <div key={c.name}>
+                        <span style={{ textTransform: 'capitalize', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.name}</span>
+                        <span className="t"><i style={{ width: `${Math.min(100, Math.max(0, c.score))}%` }}></i></span>
+                        <b>{Math.round(c.score)}</b>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="dc-actions">
+                  {dudosos > 0 && (
+                    <Link to="/explorer" className="dc-btn w">Revisar {dudosos} dudoso{dudosos > 1 ? 's' : ''}</Link>
+                  )}
+                  <Link to={`/teacher/${teacher.teacher_id}`} className="dc-btn p">Ver detalles</Link>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
     </div>
