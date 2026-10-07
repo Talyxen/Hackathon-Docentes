@@ -33,60 +33,62 @@ export const Upload: React.FC = () => {
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <h1>Subir Comentarios</h1>
+      <h1 style={{ marginBottom: '20px' }}>Subir Comentarios</h1>
       <div className="panel no-print">
-        <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+        <p className="sub" style={{ marginBottom: '1.5rem' }}>
           Sube un archivo <strong>CSV</strong> o <strong>XLSX</strong> con las columnas <code>docente</code> y <code>comentario</code>.
         </p>
         
         {error && <ErrorMessage message={error} />}
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700 }}>Archivo CSV / XLSX</label>
-            <input type="file" accept=".csv, .xlsx" onChange={handleFileChange} />
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={loading} style={{ marginTop: '1rem', padding: '0.75rem' }}>
+          <label className="drop">
+            <input type="file" accept=".csv, .xlsx" onChange={handleFileChange} hidden />
+            <b className="dsp" style={{ fontSize: '17px' }}>{file ? file.name : 'Arrastra tu archivo aquí'}</b>
+            <br />
+            <span style={{ fontSize: '13.5px' }}>{file ? 'Haz clic para cambiar' : 'o haz clic para elegirlo (.csv, .xlsx)'}</span>
+          </label>
+          <button type="submit" className="btn" disabled={loading} style={{ marginTop: '1rem', padding: '12px' }}>
             {loading ? 'Procesando (puede tomar unos segundos)...' : 'Subir y Procesar'}
           </button>
         </form>
       </div>
 
       {result && (
-        <div className="panel">
+        <div className="panel" style={{ marginTop: '20px' }}>
           <h2>Resumen de Validación</h2>
-          <div className="grid md:grid-cols-3" style={{ marginBottom: '1.5rem', gap: '1rem' }}>
-            <div style={{ padding: '1rem', backgroundColor: 'var(--bg-color)', borderRadius: '4px' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--primary-color)' }}>{result.total_rows}</div>
-              <div style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Total Filas Procesadas</div>
+          <div className="kpis" style={{ marginTop: '20px' }}>
+            <div className="panel kpi">
+              <small>Total Filas Procesadas</small>
+              <div className="dsp">{result.total_rows}</div>
             </div>
-            <div style={{ padding: '1rem', backgroundColor: 'var(--bg-color)', borderRadius: '4px' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--success-color)' }}>{result.valid_rows}</div>
-              <div style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Filas Válidas</div>
+            <div className="panel kpi">
+              <small>Filas Válidas</small>
+              <div className="dsp text-ok">{result.valid_rows}</div>
             </div>
-            <div style={{ padding: '1rem', backgroundColor: 'var(--bg-color)', borderRadius: '4px' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--error-color)' }}>{result.rejected_rows_count}</div>
-              <div style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Filas Rechazadas</div>
+            <div className="panel kpi">
+              <small>Filas Rechazadas</small>
+              <div className="dsp text-ba">{result.rejected_rows_count}</div>
             </div>
           </div>
           
           {result.rejected_details && result.rejected_details.length > 0 && (
-            <div>
+            <div style={{ marginTop: '20px' }} className="tw">
               <h3>Detalle de Filas Rechazadas</h3>
-              <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '1rem', fontSize: '0.875rem' }}>
+              <table style={{ marginTop: '1rem' }}>
                 <thead>
-                  <tr style={{ borderBottom: '2px solid var(--border-color)', textAlign: 'left' }}>
-                    <th style={{ padding: '0.5rem' }}>Fila</th>
-                    <th style={{ padding: '0.5rem' }}>Contenido Original</th>
-                    <th style={{ padding: '0.5rem' }}>Motivo de Rechazo</th>
+                  <tr>
+                    <th>Fila</th>
+                    <th>Contenido Original</th>
+                    <th>Motivo de Rechazo</th>
                   </tr>
                 </thead>
                 <tbody>
                   {result.rejected_details.map((rej: any, idx: number) => (
-                    <tr key={idx} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                      <td style={{ padding: '0.5rem' }}>{rej.row_index}</td>
-                      <td style={{ padding: '0.5rem', maxWidth: '300px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{rej.raw_content}</td>
-                      <td style={{ padding: '0.5rem', color: 'var(--error-color)' }}>{rej.rejection_reason}</td>
+                    <tr key={idx}>
+                      <td>{rej.row_index}</td>
+                      <td style={{ maxWidth: '300px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{rej.raw_content}</td>
+                      <td className="text-ba">{rej.rejection_reason}</td>
                     </tr>
                   ))}
                 </tbody>

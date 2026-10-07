@@ -1,34 +1,47 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
+  const toggleTheme = () => {
+    const d = document.documentElement;
+    const isDark = d.dataset.theme ? d.dataset.theme === 'dark' : window.matchMedia('(prefers-color-scheme:dark)').matches;
+    d.dataset.theme = isDark ? 'light' : 'dark';
+  };
+
   return (
-    <nav className="no-print" style={{ background: 'var(--primary-color)', padding: '1rem 0', boxShadow: 'var(--shadow-sm)' }}>
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link to="/" style={{ fontSize: '1.25rem', fontWeight: 700, color: 'white' }}>
+    <header className="no-print">
+      <div className="bar">
+        <div className="logo">
+          <i>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 9l10-5 10 5-10 5z"/>
+              <path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/>
+            </svg>
+          </i>
           Inteligencia Académica S-1
-        </Link>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <Link to="/" style={{ color: 'white', fontWeight: 600 }}>Dashboard</Link>
-          <Link to="/comparative" style={{ color: 'white', fontWeight: 600 }}>Comparador</Link>
-          <Link to="/explorer" style={{ color: 'white', fontWeight: 600 }}>Revisión</Link>
-          <Link to="/upload" className="btn" style={{ backgroundColor: 'white', color: 'var(--primary-color)' }}>Subir CSV/XLSX</Link>
         </div>
+        
+        <nav>
+          <NavLink to="/" className={({isActive}) => isActive ? "on" : ""}>Dashboard</NavLink>
+          <NavLink to="/comparative" className={({isActive}) => isActive ? "on" : ""}>Comparador</NavLink>
+          <NavLink to="/explorer" className={({isActive}) => isActive ? "on" : ""}>Revisión</NavLink>
+        </nav>
+        
+        <button className="btn g ic" title="Cambiar tema" aria-label="Cambiar tema" onClick={toggleTheme}>◐</button>
+        <Link to="/upload" className="btn">Subir CSV/XLSX</Link>
       </div>
-    </nav>
+    </header>
   );
 };
 
 export const Layout: React.FC = () => {
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <>
       <Navbar />
-      <main className="container main-content" style={{ flex: 1 }}>
+      <main id="app">
         <Outlet />
       </main>
-      <footer style={{ textAlign: 'center', padding: '1.5rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-        &copy; 2024 Academic Intelligence Hackathon
-      </footer>
-    </div>
+      <footer>© 2024 Academic Intelligence Hackathon</footer>
+    </>
   );
 };

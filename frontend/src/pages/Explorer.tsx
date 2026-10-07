@@ -40,19 +40,13 @@ export const Explorer: React.FC = () => {
 
   return (
     <div>
-      <h1>Centro de Revisión y Explorador</h1>
-      <div className="panel">
-        <div className="grid md:grid-cols-2">
-          <div>
-            <label style={{ display: 'block', fontWeight: 700, marginBottom: '0.5rem' }}>Nombre del Revisor</label>
-            <input type="text" value={reviewerName} onChange={e => setReviewerName(e.target.value)} placeholder="Tu nombre" />
-          </div>
-          <div>
-            <label style={{ display: 'block', fontWeight: 700, marginBottom: '0.5rem' }}>Filtro de Revisión</label>
-            <select onChange={e => setFilters({ ...filters, requires_review: e.target.value === 'true' })}>
-              <option value="true">Pendientes de Revisión (Dudosos / Sarcasmo)</option>
-              <option value="false">Ya revisados o Seguros</option>
-            </select>
+      <h1 style={{ marginBottom: '20px' }}>Centro de Revisión Humana</h1>
+      <div className="panel" style={{ marginBottom: '20px' }}>
+        <div className="sel">
+          <input type="text" value={reviewerName} onChange={e => setReviewerName(e.target.value)} placeholder="Nombre del Revisor" style={{ minWidth: '260px' }} />
+          <div className="chips">
+            <button className={`chip ${filters.requires_review ? 'on' : ''}`} onClick={() => setFilters({ requires_review: true })}>Dudosos pendientes</button>
+            <button className={`chip ${!filters.requires_review ? 'on' : ''}`} onClick={() => setFilters({ requires_review: false })}>Ya revisados</button>
           </div>
         </div>
       </div>
@@ -66,30 +60,29 @@ export const Explorer: React.FC = () => {
             <div key={c.id} className="panel">
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                 <strong>Docente: {c.teacher_name}</strong>
-                <span style={{ color: 'var(--text-muted)' }}>Status: {c.status}</span>
+                <span className={`bd ${c.status === 'REVIEWED' ? 's0' : 's1'}`}>Status: {c.status}</span>
               </div>
-              <p style={{ fontStyle: 'italic', marginBottom: '1rem' }}>"{c.raw_text}"</p>
+              <p style={{ fontStyle: 'italic', marginBottom: '1rem', fontSize: '15px' }}>"{c.raw_text}"</p>
               
-              <div style={{ backgroundColor: 'var(--bg-color)', padding: '1rem', borderRadius: '4px', marginBottom: '1rem' }}>
-                <p><strong>Aspecto Detectado:</strong> {c.aspect}</p>
-                <p><strong>Sentimiento:</strong> {c.sentiment}</p>
-                <p><strong>Evidencia:</strong> {c.evidence}</p>
-                <p><strong>Confianza NLP:</strong> {(c.confidence * 100).toFixed(1)}%</p>
+              <div className="code" style={{ marginBottom: '1rem' }}>
+                <p><strong>Aspecto:</strong> {c.aspect}</p>
+                <p><strong>Sentimiento:</strong> <span className={c.sentiment === 'POSITIVE' ? 'text-ok' : c.sentiment === 'NEGATIVE' ? 'text-ba' : 'text-mut'}>{c.sentiment}</span></p>
+                <p><strong>Evidencia NLP:</strong> {c.evidence}</p>
+                <p><strong>Confianza:</strong> {(c.confidence * 100).toFixed(1)}%</p>
                 {c.requires_review && (
-                  <p style={{ color: 'var(--warning-color)', fontWeight: 700 }}>Motivo de duda: {c.uncertainty_reason}</p>
+                  <p className="text-ba" style={{ fontWeight: 700, marginTop: '10px' }}>Motivo de duda: {c.uncertainty_reason}</p>
                 )}
               </div>
 
               {c.requires_review && (
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <button className="btn btn-primary" onClick={() => handleReview(c.id, 'CONFIRM')}>Confirmar (Correcto)</button>
-                  <button className="btn" style={{ backgroundColor: 'var(--warning-color)', color: 'white' }} onClick={() => handleReview(c.id, 'EXCLUDE')}>Excluir / Rechazar</button>
-                  {/* For correcting, we would add inputs for the corrected aspect/sentiment */}
+                  <button className="btn" style={{ background: 'var(--ok)', color: 'white' }} onClick={() => handleReview(c.id, 'CONFIRM')}>Confirmar</button>
+                  <button className="btn" style={{ background: 'var(--ba)', color: 'white' }} onClick={() => handleReview(c.id, 'EXCLUDE')}>Excluir / Rechazar</button>
                 </div>
               )}
             </div>
           ))}
-          {comments.length === 0 && <p>No hay comentarios para los filtros seleccionados.</p>}
+          {comments.length === 0 && <p style={{ color: 'var(--mut)', textAlign: 'center', padding: '40px' }}>No hay comentarios para los filtros seleccionados.</p>}
         </div>
       )}
     </div>

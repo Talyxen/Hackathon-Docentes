@@ -33,6 +33,9 @@ export const Dashboard: React.FC = () => {
   if (error) return <ErrorMessage message={error} />;
   if (teachers.length === 0) return <EmptyState title="No hay datos" description="Sube un archivo CSV/XLSX para empezar a analizar." />;
 
+  const avgScore = teachers.reduce((a, b) => a + b.general_score, 0) / (teachers.length || 1);
+  const bestTeacher = [...teachers].sort((a, b) => b.general_score - a.general_score)[0];
+
   const chartData = teachers.map(t => ({
     name: t.name,
     score: parseFloat(t.general_score.toFixed(2)),
@@ -43,131 +46,144 @@ export const Dashboard: React.FC = () => {
     name: key,
     value: val
   })) : [];
-  const COLORS = { 'POSITIVE': 'var(--success-color)', 'NEUTRAL': 'var(--text-muted)', 'NEGATIVE': 'var(--error-color)' };
+  const COLORS = { 'POSITIVE': 'var(--ok)', 'NEUTRAL': 'var(--mut)', 'NEGATIVE': 'var(--ba)' };
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h1>Dashboard Principal</h1>
-        <button onClick={() => window.print()} className="btn btn-primary no-print">Imprimir Reporte</button>
+      <div className="src">
+        <span>Fuente: <b>Datos del API</b> · {stats?.processed_comments} comentarios</span>
+        <button onClick={() => window.print()} className="btn g no-print" style={{ marginLeft: 'auto', padding: '6px 12px', fontSize: '12px' }}>Imprimir Reporte</button>
       </div>
 
-      {stats && (
-        <div className="grid md:grid-cols-4" style={{ marginBottom: '1.5rem' }}>
+      <section className="hero">
+        <div className="panel big">
+          <div className="dsp" style={{ fontSize: '16px', fontWeight: 600, color: '#C9D4FF' }}>Score Promedio</div>
+          <div className="num"><span>{avgScore.toFixed(1)}</span></div>
+          <p>{bestTeacher ? `${bestTeacher.name} lidera con ${bestTeacher.general_score.toFixed(1)}.` : ''} De {stats?.processed_comments} comentarios analizados, {stats?.valid_comments} fueron válidos y útiles para evaluación.</p>
+        </div>
+        <div className="ins">
           <div className="panel">
-            <h3 style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Comentarios Procesados / Válidos</h3>
-            <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{stats.processed_comments} / <span style={{ color: 'var(--success-color)' }}>{stats.valid_comments}</span></div>
-            <div style={{ fontSize: '0.875rem', color: 'var(--error-color)' }}>Rechazados: {stats.rejected_comments}</div>
-          </div>
-          <div className="panel">
-            <h3 style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Docentes Analizados</h3>
-            <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{stats.analyzed_teachers}</div>
-          </div>
-          <div className="panel">
-            <h3 style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Confianza Promedio (NLP)</h3>
-            <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{(stats.average_confidence * 100).toFixed(1)}%</div>
-          </div>
-          <div className="panel">
-            <h3 style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Casos por Revisar</h3>
-            <div style={{ fontSize: '1.5rem', fontWeight: 700, color: stats.cases_to_review > 0 ? 'var(--warning-color)' : 'var(--success-color)' }}>
-              {stats.cases_to_review}
+            <span className="dot" style={{ background: 'var(--ok)' }}></span>
+            <div>
+              <b>Fortaleza Global: {stats?.strengths[0]?.aspect || 'N/A'}</b>
+              <small>Score de {stats?.strengths[0]?.score || 0}/100.</small>
             </div>
-            <Link to="/explorer" style={{ fontSize: '0.875rem' }}>Ir a Centro de Revisión</Link>
-          </div>
-        </div>
-      )}
-
-      {stats && (
-        <div className="grid md:grid-cols-2" style={{ marginBottom: '1.5rem' }}>
-          <div className="panel">
-            <h2>Fortalezas Globales</h2>
-            <ul style={{ paddingLeft: '1.5rem' }}>
-              {stats.strengths.map((s: any, i: number) => (
-                <li key={i}><strong>{s.aspect}</strong>: {s.score}/100</li>
-              ))}
-            </ul>
           </div>
           <div className="panel">
-            <h2>Aspectos Críticos</h2>
-            <ul style={{ paddingLeft: '1.5rem' }}>
-              {stats.critical_aspects.map((s: any, i: number) => (
-                <li key={i}><strong>{s.aspect}</strong>: {s.score}/100</li>
-              ))}
-            </ul>
+            <span className="dot" style={{ background: 'var(--ba)' }}></span>
+            <div>
+              <b>Aspecto Crítico: {stats?.critical_aspects[0]?.aspect || 'N/A'}</b>
+              <small>Requiere atención inmediata ({stats?.critical_aspects[0]?.score || 0}/100).</small>
+            </div>
+          </div>
+          <div className="panel">
+            <span className="dot" style={{ background: 'var(--wa)' }}></span>
+            <div>
+              <b>{stats?.cases_to_review} casos por revisar</b>
+              <small>Comentarios marcados como dudosos o contradictorios por NLP.</small>
+            </div>
           </div>
         </div>
-      )}
+      </section>
 
-      <div className="grid md:grid-cols-2" style={{ marginBottom: '1.5rem' }}>
-        <div className="panel">
-          <h2>Ranking General</h2>
-          <div style={{ height: 300, width: '100%', marginTop: '1rem' }}>
+      <section className="kpis">
+        <div className="panel kpi">
+          <small>Docentes</small>
+          <div className="dsp">{stats?.analyzed_teachers}</div>
+          <div className="tr"><i style={{ width: '100%', background: 'var(--ac)' }}></i></div>
+        </div>
+        <div className="panel kpi">
+          <small>Confianza NLP</small>
+          <div className="dsp">{(stats?.average_confidence * 100).toFixed(1)}%</div>
+          <div className="tr"><i style={{ width: `${stats?.average_confidence * 100}%`, background: 'var(--ac2)' }}></i></div>
+        </div>
+        <div className="panel kpi">
+          <small>Comentarios Válidos</small>
+          <div className="dsp">{Math.round((stats?.valid_comments / (stats?.processed_comments || 1)) * 100)}%</div>
+          <div className="tr"><i style={{ width: `${(stats?.valid_comments / (stats?.processed_comments || 1)) * 100}%`, background: 'var(--ok)' }}></i></div>
+        </div>
+        <div className="panel kpi">
+          <small>Revisión Pendiente</small>
+          <div className="dsp">{stats?.cases_to_review}</div>
+          <div className="tr"><i style={{ width: `${(stats?.cases_to_review / (stats?.processed_comments || 1)) * 100}%`, background: 'var(--wa)' }}></i></div>
+        </div>
+      </section>
+
+      <section className="grid">
+        <div className="panel c7">
+          <h3>Ranking General</h3>
+          <p className="sub">Puntuación global por docente.</p>
+          <div style={{ height: 200, width: '100%', marginTop: '1rem' }}>
             <ResponsiveContainer>
-              <BarChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border-color)" />
-                <XAxis dataKey="name" tick={{ fill: 'var(--text-muted)' }} />
-                <YAxis domain={[0, 100]} tick={{ fill: 'var(--text-muted)' }} />
-                <Tooltip />
+              <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--line)" />
+                <XAxis dataKey="name" tick={{ fill: 'var(--mut)', fontSize: 12 }} />
+                <YAxis domain={[0, 100]} tick={{ fill: 'var(--mut)', fontSize: 12 }} />
+                <Tooltip contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--line)', color: 'var(--ink)' }} />
                 <Bar dataKey="score" radius={[4, 4, 0, 0]}>
                   {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.provisional ? 'var(--warning-color)' : 'var(--primary-color)'} />
+                    <Cell key={`cell-${index}`} fill={entry.provisional ? 'var(--wa)' : 'var(--ac)'} />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
-        
-        {stats && (
-          <div className="panel">
-            <h2>Distribución de Sentimiento Global</h2>
-            <div style={{ height: 300, width: '100%', marginTop: '1rem' }}>
-              <ResponsiveContainer>
-                <PieChart>
-                  <Pie data={sentimentData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={5} dataKey="value">
-                    {sentimentData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[entry.name as keyof typeof COLORS] || 'var(--primary-color)'} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        )}
-      </div>
 
-      <h2>Desempeño por Docente</h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3">
-        {teachers.map(teacher => (
-          <div key={teacher.teacher_id} className="panel">
-            <h3 style={{ marginBottom: '0.5rem' }}>{teacher.name}</h3>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-              <span style={{ fontSize: '2rem', fontWeight: 700, color: teacher.has_insufficient_sample ? 'var(--warning-color)' : 'var(--success-color)' }}>
-                {teacher.general_score.toFixed(1)}
-              </span>
-              <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem', alignSelf: 'flex-end', textAlign: 'right' }}>
-                {teacher.total_comments} comentarios<br/>
-                {teacher.score_details?.n || 0} n
-              </span>
-            </div>
-            
-            <div style={{ fontSize: '0.875rem', marginBottom: '1rem' }}>
-              Dudosos pendientes: <strong>{teacher.score_details?.pending_review || 0}</strong>
-            </div>
-
-            {teacher.has_insufficient_sample && (
-              <div style={{ fontSize: '0.875rem', color: 'var(--warning-color)', marginBottom: '1rem', fontWeight: 'bold' }}>
-                * Muestra Insuficiente (Provisional)
-              </div>
-            )}
-            <Link to={`/teacher/${teacher.teacher_id}`} className="btn btn-primary" style={{ width: '100%' }}>
-              Ver Detalles
-            </Link>
+        <div className="panel c5">
+          <h3>Sentimiento Global</h3>
+          <p className="sub">Distribución de polaridad.</p>
+          <div style={{ height: 200, width: '100%' }}>
+            <ResponsiveContainer>
+              <PieChart>
+                <Pie data={sentimentData} cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={5} dataKey="value">
+                  {sentimentData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[entry.name as keyof typeof COLORS] || 'var(--ac)'} />
+                  ))}
+                </Pie>
+                <Tooltip contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--line)', color: 'var(--ink)' }} />
+                <Legend iconType="circle" wrapperStyle={{ fontSize: '12px' }} />
+              </PieChart>
+            </ResponsiveContainer>
           </div>
-        ))}
-      </div>
+        </div>
+
+        <div className="c12">
+          <h3 style={{ marginTop: '10px' }}>Desempeño por Docente</h3>
+          <div className="grid">
+            {teachers.map(teacher => {
+              return (
+                <div key={teacher.teacher_id} className="panel c4">
+                  <h3 style={{ marginBottom: '0.5rem' }}>{teacher.name}</h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                    <span style={{ fontSize: '2.5rem', fontFamily: 'Sora', fontWeight: 700, color: teacher.has_insufficient_sample ? 'var(--wa)' : 'var(--ok)' }}>
+                      {teacher.general_score.toFixed(1)}
+                    </span>
+                    <span style={{ color: 'var(--mut)', fontSize: '0.875rem', alignSelf: 'center', textAlign: 'right', lineHeight: 1.2 }}>
+                      {teacher.total_comments} comments<br />
+                      n={teacher.score_details?.n || 0}
+                    </span>
+                  </div>
+
+                  <div style={{ fontSize: '13px', marginBottom: '14px', color: 'var(--mut)' }}>
+                    Dudosos pendientes: <b style={{ color: 'var(--ink)' }}>{teacher.score_details?.pending_review || 0}</b>
+                  </div>
+
+                  {teacher.has_insufficient_sample && (
+                    <div style={{ fontSize: '12.5px', background: 'rgba(245,158,11,0.16)', color: '#B7791F', padding: '4px 8px', borderRadius: '4px', marginBottom: '14px', fontWeight: 600 }}>
+                      Muestra insuficiente
+                    </div>
+                  )}
+                  
+                  <Link to={`/teacher/${teacher.teacher_id}`} className="btn g" style={{ width: '100%', textAlign: 'center', display: 'block' }}>
+                    Ver Detalles
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

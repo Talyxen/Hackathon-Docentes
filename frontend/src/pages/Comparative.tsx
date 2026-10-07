@@ -27,43 +27,46 @@ export const Comparative: React.FC = () => {
 
   return (
     <div>
-      <h1>Comparador de Docentes</h1>
-      <p className="no-print" style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+      <h1 style={{ marginBottom: '20px' }}>Comparador de Docentes</h1>
+      <p className="sub no-print" style={{ marginBottom: '1.5rem' }}>
         El score mostrado aplica el suavizado Bayesiano (Shrinkage) basado en una media global de {data.global_batch_priors.M_a} 
         y un parámetro de sensibilidad m = {data.sensitivity_m}.
       </p>
 
-      <div className="panel">
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+      <div className="panel tw">
+        <table>
           <thead>
-            <tr style={{ borderBottom: '2px solid var(--border-color)' }}>
-              <th style={{ padding: '1rem' }}>Docente</th>
-              <th style={{ padding: '1rem' }}>Score Ajustado</th>
-              <th style={{ padding: '1rem' }}>Comentarios Válidos (n)</th>
-              <th style={{ padding: '1rem' }}>Aspecto Más Fuerte</th>
-              <th style={{ padding: '1rem' }}>Revisión</th>
+            <tr>
+              <th>Docente</th>
+              <th>Score Ajustado</th>
+              <th>Comentarios Válidos (n)</th>
+              <th>Aspecto Más Fuerte</th>
+              <th>Revisión</th>
             </tr>
           </thead>
           <tbody>
-            {data.teachers.map((t, idx) => {
+            {data.teachers.map((t) => {
               const bestAspect = t.aspects.length > 0 ? t.aspects.reduce((prev, curr) => (prev.score > curr.score) ? prev : curr) : null;
               
               return (
-                <tr key={t.teacher_id} style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: idx % 2 === 0 ? 'var(--surface-color)' : 'var(--bg-color)' }}>
-                  <td style={{ padding: '1rem', fontWeight: 700 }}>
-                    {t.name}
-                    {t.has_insufficient_sample && <span style={{ color: 'var(--warning-color)', fontSize: '0.75rem', display: 'block' }}>(Provisional)</span>}
+                <tr key={t.teacher_id}>
+                  <td>
+                    <span className="av" style={{ marginRight: '12px' }}>{t.name.split(' ').slice(0, 2).map(x => x[0]).join('')}</span>
+                    <strong style={{ verticalAlign: 'middle' }}>{t.name}</strong>
+                    {t.has_insufficient_sample && <span className="bd s1" style={{ marginLeft: '10px' }}>Provisional</span>}
                   </td>
-                  <td style={{ padding: '1rem', fontSize: '1.25rem', color: t.has_insufficient_sample ? 'var(--warning-color)' : 'var(--success-color)', fontWeight: 700 }}>
-                    {t.general_score.toFixed(1)}
+                  <td>
+                    <b className={t.has_insufficient_sample ? 'text-wa' : 'text-ok'} style={{ fontSize: '16px' }}>
+                      {t.general_score.toFixed(1)}
+                    </b>
                   </td>
-                  <td style={{ padding: '1rem' }}>{t.score_details?.n || 0} n</td>
-                  <td style={{ padding: '1rem' }}>{bestAspect ? `${bestAspect.name} (${bestAspect.score.toFixed(1)})` : 'N/A'}</td>
-                  <td style={{ padding: '1rem' }}>
+                  <td>{t.score_details?.n || 0} n</td>
+                  <td>{bestAspect ? `${bestAspect.name} (${bestAspect.score.toFixed(1)})` : 'N/A'}</td>
+                  <td>
                     {t.score_details?.pending_review > 0 ? (
-                      <span style={{ color: 'var(--warning-color)', fontWeight: 700 }}>{t.score_details.pending_review} dudosos pendientes</span>
+                      <span className="bd s1">{t.score_details.pending_review} dudosos pendientes</span>
                     ) : (
-                      <span style={{ color: 'var(--success-color)' }}>0 dudosos pendientes</span>
+                      <span className="bd s0">0 dudosos pendientes</span>
                     )}
                   </td>
                 </tr>
