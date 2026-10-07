@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { apiService } from '../services/api';
 import { ErrorMessage } from '../components/UI/Basic';
 
@@ -38,7 +39,7 @@ export const Upload: React.FC = () => {
         <p className="sub" style={{ marginBottom: '1.5rem' }}>
           Sube un archivo <strong>CSV</strong> o <strong>XLSX</strong> con las columnas <code>docente</code> y <code>comentario</code>.
         </p>
-        
+
         {error && <ErrorMessage message={error} />}
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -71,7 +72,7 @@ export const Upload: React.FC = () => {
               <div className="dsp text-ba">{result.rejected_rows_count}</div>
             </div>
           </div>
-          
+
           {result.rejected_details && result.rejected_details.length > 0 && (
             <div style={{ marginTop: '20px' }} className="tw">
               <h3>Detalle de Filas Rechazadas</h3>
@@ -95,6 +96,12 @@ export const Upload: React.FC = () => {
               </table>
             </div>
           )}
+
+          <div style={{ marginTop: '24px', textAlign: 'center' }}>
+            <Link to="/" className="btn" style={{ padding: '12px 24px', fontSize: '15px' }}>
+              Ver Resultados en el Dashboard &rarr;
+            </Link>
+          </div>
         </div>
       )}
     </div>

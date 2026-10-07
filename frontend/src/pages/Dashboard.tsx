@@ -37,7 +37,7 @@ export const Dashboard: React.FC = () => {
   const bestTeacher = [...teachers].sort((a, b) => b.general_score - a.general_score)[0];
 
   const chartData = teachers.map(t => ({
-    name: t.name,
+    name: t.display_name || t.name,
     score: parseFloat(t.general_score.toFixed(2)),
     provisional: t.has_insufficient_sample
   }));
@@ -51,7 +51,7 @@ export const Dashboard: React.FC = () => {
   return (
     <div>
       <div className="src">
-        <span>Fuente: <b>Datos del API</b> · {stats?.processed_comments} comentarios</span>
+        <span>Fuente: <b>Datos del API</b> · {stats?.processed_comments || 0} comentarios</span>
         <button onClick={() => window.print()} className="btn g no-print" style={{ marginLeft: 'auto', padding: '6px 12px', fontSize: '12px' }}>Imprimir Reporte</button>
       </div>
 
@@ -59,27 +59,27 @@ export const Dashboard: React.FC = () => {
         <div className="panel big">
           <div className="dsp" style={{ fontSize: '16px', fontWeight: 600, color: '#C9D4FF' }}>Score Promedio</div>
           <div className="num"><span>{avgScore.toFixed(1)}</span></div>
-          <p>{bestTeacher ? `${bestTeacher.name} lidera con ${bestTeacher.general_score.toFixed(1)}.` : ''} De {stats?.processed_comments} comentarios analizados, {stats?.valid_comments} fueron válidos y útiles para evaluación.</p>
+          <p>{bestTeacher ? `${bestTeacher.display_name || bestTeacher.name} lidera con ${bestTeacher.general_score.toFixed(1)}.` : ''} De {stats?.processed_comments || 0} comentarios analizados, {stats?.valid_comments || 0} fueron válidos y útiles para evaluación.</p>
         </div>
         <div className="ins">
           <div className="panel">
             <span className="dot" style={{ background: 'var(--ok)' }}></span>
             <div>
-              <b>Fortaleza Global: {stats?.strengths[0]?.aspect || 'N/A'}</b>
-              <small>Score de {stats?.strengths[0]?.score || 0}/100.</small>
+              <b>Fortaleza Global: {stats?.strengths?.[0]?.aspect || 'N/A'}</b>
+              <small>Score de {stats?.strengths?.[0]?.score || 0}/100.</small>
             </div>
           </div>
           <div className="panel">
             <span className="dot" style={{ background: 'var(--ba)' }}></span>
             <div>
-              <b>Aspecto Crítico: {stats?.critical_aspects[0]?.aspect || 'N/A'}</b>
-              <small>Requiere atención inmediata ({stats?.critical_aspects[0]?.score || 0}/100).</small>
+              <b>Aspecto Crítico: {stats?.critical_aspects?.[0]?.aspect || 'N/A'}</b>
+              <small>Requiere atención inmediata ({stats?.critical_aspects?.[0]?.score || 0}/100).</small>
             </div>
           </div>
           <div className="panel">
             <span className="dot" style={{ background: 'var(--wa)' }}></span>
             <div>
-              <b>{stats?.cases_to_review} casos por revisar</b>
+              <b>{stats?.cases_to_review || 0} casos por revisar</b>
               <small>Comentarios marcados como dudosos o contradictorios por NLP.</small>
             </div>
           </div>
@@ -89,23 +89,23 @@ export const Dashboard: React.FC = () => {
       <section className="kpis">
         <div className="panel kpi">
           <small>Docentes</small>
-          <div className="dsp">{stats?.analyzed_teachers}</div>
+          <div className="dsp">{stats?.analyzed_teachers || teachers.length}</div>
           <div className="tr"><i style={{ width: '100%', background: 'var(--ac)' }}></i></div>
         </div>
         <div className="panel kpi">
           <small>Confianza NLP</small>
-          <div className="dsp">{(stats?.average_confidence * 100).toFixed(1)}%</div>
-          <div className="tr"><i style={{ width: `${stats?.average_confidence * 100}%`, background: 'var(--ac2)' }}></i></div>
+          <div className="dsp">{((stats?.average_confidence || 0.85) * 100).toFixed(1)}%</div>
+          <div className="tr"><i style={{ width: `${(stats?.average_confidence || 0.85) * 100}%`, background: 'var(--ac2)' }}></i></div>
         </div>
         <div className="panel kpi">
           <small>Comentarios Válidos</small>
-          <div className="dsp">{Math.round((stats?.valid_comments / (stats?.processed_comments || 1)) * 100)}%</div>
-          <div className="tr"><i style={{ width: `${(stats?.valid_comments / (stats?.processed_comments || 1)) * 100}%`, background: 'var(--ok)' }}></i></div>
+          <div className="dsp">{Math.round(((stats?.valid_comments || 0) / (stats?.processed_comments || 1)) * 100)}%</div>
+          <div className="tr"><i style={{ width: `${((stats?.valid_comments || 0) / (stats?.processed_comments || 1)) * 100}%`, background: 'var(--ok)' }}></i></div>
         </div>
         <div className="panel kpi">
           <small>Revisión Pendiente</small>
-          <div className="dsp">{stats?.cases_to_review}</div>
-          <div className="tr"><i style={{ width: `${(stats?.cases_to_review / (stats?.processed_comments || 1)) * 100}%`, background: 'var(--wa)' }}></i></div>
+          <div className="dsp">{stats?.cases_to_review || 0}</div>
+          <div className="tr"><i style={{ width: `${((stats?.cases_to_review || 0) / (stats?.processed_comments || 1)) * 100}%`, background: 'var(--wa)' }}></i></div>
         </div>
       </section>
 
@@ -152,29 +152,30 @@ export const Dashboard: React.FC = () => {
           <h3 style={{ marginTop: '10px' }}>Desempeño por Docente</h3>
           <div className="grid">
             {teachers.map(teacher => {
+              const name = teacher.display_name || teacher.name || 'Docente';
               return (
                 <div key={teacher.teacher_id} className="panel c4">
-                  <h3 style={{ marginBottom: '0.5rem' }}>{teacher.name}</h3>
+                  <h3 style={{ marginBottom: '0.5rem' }}>{name}</h3>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                     <span style={{ fontSize: '2.5rem', fontFamily: 'Sora', fontWeight: 700, color: teacher.has_insufficient_sample ? 'var(--wa)' : 'var(--ok)' }}>
                       {teacher.general_score.toFixed(1)}
                     </span>
                     <span style={{ color: 'var(--mut)', fontSize: '0.875rem', alignSelf: 'center', textAlign: 'right', lineHeight: 1.2 }}>
-                      {teacher.total_comments} comments<br />
-                      n={teacher.score_details?.n || 0}
+                      {teacher.total_valid_pairs || teacher.total_comments || 0} evals<br />
+                      n={teacher.total_valid_pairs || teacher.score_details?.n || 0}
                     </span>
                   </div>
 
                   <div style={{ fontSize: '13px', marginBottom: '14px', color: 'var(--mut)' }}>
-                    Dudosos pendientes: <b style={{ color: 'var(--ink)' }}>{teacher.score_details?.pending_review || 0}</b>
+                    Dudosos pendientes: <b style={{ color: 'var(--ink)' }}>{teacher.pending_reviews_count || teacher.score_details?.pending_review || 0}</b>
                   </div>
 
                   {teacher.has_insufficient_sample && (
                     <div style={{ fontSize: '12.5px', background: 'rgba(245,158,11,0.16)', color: '#B7791F', padding: '4px 8px', borderRadius: '4px', marginBottom: '14px', fontWeight: 600 }}>
-                      Muestra insuficiente
+                      Muestra insuficiente ({teacher.ranking_category})
                     </div>
                   )}
-                  
+
                   <Link to={`/teacher/${teacher.teacher_id}`} className="btn g" style={{ width: '100%', textAlign: 'center', display: 'block' }}>
                     Ver Detalles
                   </Link>

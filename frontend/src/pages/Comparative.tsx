@@ -23,13 +23,15 @@ export const Comparative: React.FC = () => {
 
   if (loading) return <Loader />;
   if (error) return <ErrorMessage message={error} />;
-  if (!data || data.teachers.length === 0) return <p>No hay docentes analizados para comparar.</p>;
+  if (!data || data.teachers.length === 0) return <p style={{ padding: '40px', textAlign: 'center', color: 'var(--mut)' }}>No hay docentes analizados para comparar.</p>;
+
+  const avgPrior = Object.values(data.global_batch_priors || {}).reduce((a, b) => a + b, 0) / (Object.keys(data.global_batch_priors || {}).length || 1);
 
   return (
     <div>
       <h1 style={{ marginBottom: '20px' }}>Comparador de Docentes</h1>
       <p className="sub no-print" style={{ marginBottom: '1.5rem' }}>
-        El score mostrado aplica el suavizado Bayesiano (Shrinkage) basado en una media global de {data.global_batch_priors.M_a} 
+        El score mostrado aplica el suavizado Bayesiano (Shrinkage) basado en priors de lote ({avgPrior ? avgPrior.toFixed(1) : 50.0}) 
         y un parámetro de sensibilidad m = {data.sensitivity_m}.
       </p>
 
@@ -39,20 +41,24 @@ export const Comparative: React.FC = () => {
             <tr>
               <th>Docente</th>
               <th>Score Ajustado</th>
-              <th>Comentarios Válidos (n)</th>
+              <th>Evaluaciones (n)</th>
               <th>Aspecto Más Fuerte</th>
-              <th>Revisión</th>
+              <th>Estado de Revisión</th>
             </tr>
           </thead>
           <tbody>
             {data.teachers.map((t) => {
-              const bestAspect = t.aspects.length > 0 ? t.aspects.reduce((prev, curr) => (prev.score > curr.score) ? prev : curr) : null;
-              
+              const name = t.display_name || t.name || 'Docente';
+              const initials = name.split(' ').slice(0, 2).map(x => x[0]).join('') || 'D';
+              const bestAspect = t.aspects && t.aspects.length > 0 
+                ? t.aspects.reduce((prev, curr) => (prev.score > curr.score) ? prev : curr) 
+                : null;
+
               return (
                 <tr key={t.teacher_id}>
                   <td>
-                    <span className="av" style={{ marginRight: '12px' }}>{t.name.split(' ').slice(0, 2).map(x => x[0]).join('')}</span>
-                    <strong style={{ verticalAlign: 'middle' }}>{t.name}</strong>
+                    <span className="av" style={{ marginRight: '12px' }}>{initials}</span>
+                    <strong style={{ verticalAlign: 'middle' }}>{name}</strong>
                     {t.has_insufficient_sample && <span className="bd s1" style={{ marginLeft: '10px' }}>Provisional</span>}
                   </td>
                   <td>
@@ -60,11 +66,13 @@ export const Comparative: React.FC = () => {
                       {t.general_score.toFixed(1)}
                     </b>
                   </td>
-                  <td>{t.score_details?.n || 0} n</td>
-                  <td>{bestAspect ? `${bestAspect.name} (${bestAspect.score.toFixed(1)})` : 'N/A'}</td>
+                  <td>{t.total_valid_pairs} n</td>
+                  <td style={{ textTransform: 'capitalize' }}>
+                    {bestAspect ? `${bestAspect.name} (${bestAspect.score.toFixed(1)})` : 'N/A'}
+                  </td>
                   <td>
-                    {t.score_details?.pending_review > 0 ? (
-                      <span className="bd s1">{t.score_details.pending_review} dudosos pendientes</span>
+                    {t.pending_reviews_count > 0 ? (
+                      <span className="bd s1">{t.pending_reviews_count} dudosos pendientes</span>
                     ) : (
                       <span className="bd s0">0 dudosos pendientes</span>
                     )}
