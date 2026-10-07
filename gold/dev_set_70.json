@@ -1,0 +1,1037 @@
+[
+  {
+    "comment_id": "GOLD-DEV-001",
+    "raw_text": "Explica la materia con mucha claridad, pero desafortunadamente llega 20 minutos tarde a casi todas las clases.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Explica la materia con mucha claridad"
+      },
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "llega 20 minutos tarde a casi todas las clases"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-002",
+    "raw_text": "Tiene un dominio del tema impresionante y resuelve todas las dudas, pero sus exámenes son exageradamente difíciles e injustos.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Tiene un dominio del tema impresionante"
+      },
+      {
+        "aspect": "claridad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "resuelve todas las dudas"
+      },
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "sus exámenes son exageradamente difíciles e injustos"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-003",
+    "raw_text": "Sí, claro, llega super puntual... como media hora después.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "llega super puntual... como media hora después"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-DEV-004",
+    "raw_text": "El profesor es muy amable y siempre está disponible en su oficina para atender consultas fuera de clase.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "POSITIVE",
+        "evidence_span": "El profesor es muy amable"
+      },
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "siempre está disponible en su oficina para atender consultas fuera de clase"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-005",
+    "raw_text": "Su metodología es excelente con talleres prácticos, aunque el ritmo de la clase es un poco acelerado.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Su metodología es excelente con talleres prácticos"
+      },
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "el ritmo de la clase es un poco acelerado"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-006",
+    "raw_text": "Al principio la claridad es máxima, pero después su claridad es pésima y nadie entiende nada.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "claridad es máxima, pero después su claridad es pésima"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SAME_ASPECT_CONTRADICTION"]
+  },
+  {
+    "comment_id": "GOLD-DEV-007",
+    "raw_text": "Impecable 'profesionalismo'... no califica los parciales ni entrega notas en todo el semestre.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "no califica los parciales ni entrega notas en todo el semestre"
+      },
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Impecable 'profesionalismo'"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-DEV-008",
+    "raw_text": "Sigue el syllabus al pie de la letra y el material enviado al grupo virtual está siempre organizado.",
+    "aspects": [
+      {
+        "aspect": "organizacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Sigue el syllabus al pie de la letra y el material enviado al grupo virtual está siempre organizado"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-009",
+    "raw_text": "Es muy grosero cuando un estudiante hace preguntas en clase y responde con burla.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Es muy grosero cuando un estudiante hace preguntas en clase y responde con burla"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-010",
+    "raw_text": "Conoce muchísimo del tema, pero solo se dedica a leer diapositivas sin hacer ejercicios prácticos.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Conoce muchísimo del tema"
+      },
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "solo se dedica a leer diapositivas sin hacer ejercicios prácticos"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-011",
+    "raw_text": "Qué 'gran' disposición para atender dudas... nunca responde los correos ni se conecta a las tutorías.",
+    "aspects": [
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "nunca responde los correos ni se conecta a las tutorías"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-DEV-012",
+    "raw_text": "La evaluación fue totalmente justa y retroalimentó cada error en el trabajo final.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "La evaluación fue totalmente justa y retroalimentó cada error en el trabajo final"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-013",
+    "raw_text": "Las clases son entretenidas pero a veces se desvía del tema principal.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Las clases son entretenidas"
+      },
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "a veces se desvía del tema principal"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-014",
+    "raw_text": "Siempre llega a tiempo a la clase de las 7:00 AM.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Siempre llega a tiempo a la clase de las 7:00 AM"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-015",
+    "raw_text": "No se sabe si domina o no la materia, a veces responde bien y a veces parece adivinar.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "No se sabe si domina o no la materia"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["LOW_CONFIDENCE"]
+  },
+  {
+    "comment_id": "GOLD-DEV-016",
+    "raw_text": "Aplica rúbricas claras desde el primer día y califica con objetividad.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Aplica rúbricas claras desde el primer día y califica con objetividad"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-017",
+    "raw_text": "El docente explica excelente los talleres prácticos pero falta más organización en las fechas del proyecto.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "explica excelente los talleres prácticos"
+      },
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "falta más organización en las fechas del proyecto"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-018",
+    "raw_text": "Definitivamente un docente brillante, domina su área y fomenta el debate respetuoso.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "POSITIVE",
+        "evidence_span": "domina su área"
+      },
+      {
+        "aspect": "trato",
+        "sentiment": "POSITIVE",
+        "evidence_span": "fomenta el debate respetuoso"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-019",
+    "raw_text": "Una 'maravilla' de docente... se va 40 minutos antes de terminar la clase.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "se va 40 minutos antes de terminar la clase"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-DEV-020",
+    "raw_text": "Responde las dudas en clase de forma paciente y repetida hasta que todos entiendan.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Responde las dudas en clase de forma paciente y repetida hasta que todos entiendan"
+      },
+      {
+        "aspect": "trato",
+        "sentiment": "POSITIVE",
+        "evidence_span": "paciente"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-021",
+    "raw_text": "Cambia las fechas de los exámentes de un día para otro sin avisar previa comunicación.",
+    "aspects": [
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Cambia las fechas de los exámentes de un día para otro sin avisar"
+      },
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Cambia las fechas de los exámentes"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-022",
+    "raw_text": "Excelente profesor, nada que reprochar.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Excelente profesor"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-023",
+    "raw_text": "Es impuntual pero en trato es un amor de persona.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Es impuntual"
+      },
+      {
+        "aspect": "trato",
+        "sentiment": "POSITIVE",
+        "evidence_span": "en trato es un amor de persona"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-024",
+    "raw_text": "El material de apoyo en la plataforma virtual es muy completo y actualizado.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "El material de apoyo en la plataforma virtual es muy completo"
+      },
+      {
+        "aspect": "organizacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "actualizado"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-025",
+    "raw_text": "A veces es claro y a veces es totalmente confuso para explicar los algoritmos.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "A veces es claro y a veces es totalmente confuso"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SAME_ASPECT_CONTRADICTION"]
+  },
+  {
+    "comment_id": "GOLD-DEV-026",
+    "raw_text": "Sus explicaciones son abstractas y no da ejemplos aplicados al mundo real.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Sus explicaciones son abstractas"
+      },
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "no da ejemplos aplicados al mundo real"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-027",
+    "raw_text": "Sabe muchísimo de la asignatura y se nota su experiencia profesional en la industria.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Sabe muchísimo de la asignatura y se nota su experiencia profesional"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-028",
+    "raw_text": "Muy puntual para iniciar la clase pero se pasa 15 minutos de la hora de salida.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Muy puntual para iniciar la clase pero se pasa 15 minutos de la hora de salida"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-029",
+    "raw_text": "Las asesorías individuales son super útiles para preparar los trabajos de grado.",
+    "aspects": [
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Las asesorías individuales son super útiles"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-030",
+    "raw_text": "Super 'comprensivo'... le pides revisión de una nota y te la baja más.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "le pides revisión de una nota y te la baja más"
+      },
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "te la baja más"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-DEV-031",
+    "raw_text": "Entrega las calificaciones a tiempo y con comentarios constructivos.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Entrega las calificaciones a tiempo y con comentarios constructivos"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-032",
+    "raw_text": "No escucha las opiniones de los estudiantes y corta las participaciones abruptamente.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "No escucha las opiniones de los estudiantes y corta las participaciones abruptamente"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-033",
+    "raw_text": "Utiliza videos, diapositivas y código en vivo en cada clase.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Utiliza videos, diapositivas y código en vivo en cada clase"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-034",
+    "raw_text": "Falta a clase seguido y no avisa con anticipación.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Falta a clase seguido"
+      },
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "no avisa con anticipación"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-035",
+    "raw_text": "Es exigente en la evaluación pero da oportunidades de mejora en las entregas.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Es exigente en la evaluación pero da oportunidades de mejora"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-036",
+    "raw_text": "Dominio regular del tema, a veces titubea al resolver preguntas avanzadas.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Dominio regular del tema, a veces titubea"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-037",
+    "raw_text": "La clase es demasiado teórica y aburrida.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "La clase es demasiado teórica y aburrida"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-038",
+    "raw_text": "Responde correos a cualquier hora, incluso los fines de semana.",
+    "aspects": [
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Responde correos a cualquier hora, incluso los fines de semana"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-039",
+    "raw_text": "Muy buen profesor en general.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Muy buen profesor"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-040",
+    "raw_text": "Qué 'eficiencia'... pasaron dos meses y no conocemos la nota del primer corte.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "pasaron dos meses y no conocemos la nota del primer corte"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-DEV-041",
+    "raw_text": "El profesor explica con calma pero el volumen de su voz es muy bajo y cuesta concentrarse.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "volumen de su voz es muy bajo y cuesta concentrarse"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-042",
+    "raw_text": "Muy respetuoso con todos los estudiantes sin importar su nivel de conocimientos.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Muy respetuoso con todos los estudiantes"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-043",
+    "raw_text": "Sus tareas son desproporcionadas en cantidad y no aportan al aprendizaje.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Sus tareas son desproporcionadas en cantidad"
+      },
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "no aportan al aprendizaje"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-044",
+    "raw_text": "Puntualidad británica, nunca falla al reloj.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Puntualidad británica, nunca falla al reloj"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-045",
+    "raw_text": "Demuestra pasion por lo que enseña y contagia el entusiasmo.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Demuestra pasion por lo que enseña"
+      },
+      {
+        "aspect": "trato",
+        "sentiment": "POSITIVE",
+        "evidence_span": "contagia el entusiasmo"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-046",
+    "raw_text": "No se sabe si el examen entra o no entra en la fecha pactada.",
+    "aspects": [
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "No se sabe si el examen entra o no entra en la fecha pactada"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["LOW_CONFIDENCE"]
+  },
+  {
+    "comment_id": "GOLD-DEV-047",
+    "raw_text": "Nos apoya con asesorías grupales antes de los exámenes parciales.",
+    "aspects": [
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Nos apoya con asesorías grupales"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-048",
+    "raw_text": "Llega tarde siempre, pero cuando llega explica excelente.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Llega tarde siempre"
+      },
+      {
+        "aspect": "claridad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "explica excelente"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-049",
+    "raw_text": "Cero empatía con los estudiantes que tienen excusa médica.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Cero empatía con los estudiantes que tienen excusa médica"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-050",
+    "raw_text": "Excelente profesor de ingeniería.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Excelente profesor de ingeniería"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-051",
+    "raw_text": "No se le entiende nada cuando escribe en el tablero, la letra es ilegible.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "No se le entiende nada cuando escribe en el tablero"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-052",
+    "raw_text": "Publica el cronograma de notas y lecturas con anticipación en la web del curso.",
+    "aspects": [
+      {
+        "aspect": "organizacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Publica el cronograma de notas y lecturas con anticipación"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-053",
+    "raw_text": "Se nota que prepara las clases con esmero.",
+    "aspects": [
+      {
+        "aspect": "organizacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "prepara las clases con esmero"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-054",
+    "raw_text": "Claro... seguro va a calificar los proyectos a tiempo esta vez.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "seguro va a calificar los proyectos a tiempo esta vez"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-DEV-055",
+    "raw_text": "La clase es bastante normal, cumple con lo básico del programa.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "cumple con lo básico del programa"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-056",
+    "raw_text": "Brinda buenos ejemplos del sector empresarial real.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Brinda buenos ejemplos del sector empresarial real"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-057",
+    "raw_text": "Nunca tiene tiempo para atender inquietudes fuera del horario lectivo.",
+    "aspects": [
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Nunca tiene tiempo para atender inquietudes fuera del horario lectivo"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-058",
+    "raw_text": "Resuelve los ejercicios en vivo y comete errores que luego corrige explicando la causa.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Resuelve los ejercicios en vivo"
+      },
+      {
+        "aspect": "claridad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "explicando la causa"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-059",
+    "raw_text": "Examen extremadamente complejo sin haber visto los temas en clase.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Examen extremadamente complejo sin haber visto los temas en clase"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-060",
+    "raw_text": "Es puntual para iniciar pero le falta más dominio técnico.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Es puntual para iniciar"
+      },
+      {
+        "aspect": "dominio",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "le falta más dominio técnico"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-061",
+    "raw_text": "El trato hacia las estudiantes mujeres a veces se siente inadecuado.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "El trato hacia las estudiantes mujeres a veces se siente inadecuado"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-062",
+    "raw_text": "Excelente profesor, aprendí muchísimo durante este semestre.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "aprendí muchísimo durante este semestre"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-063",
+    "raw_text": "Qué 'agradable' sujeto... te grita frente a todos si te equivocas en el tablero.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "te grita frente a todos si te equivocas en el tablero"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-DEV-064",
+    "raw_text": "Se apoya en monitores que explican bien las dudas complejas.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Se apoya en monitores"
+      },
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "explican bien las dudas complejas"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-065",
+    "raw_text": "No hay orden en las entregas de tareas.",
+    "aspects": [
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "No hay orden en las entregas de tareas"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-066",
+    "raw_text": "Mantiene abierto su canal de comunicación en Teams durante la jornada académica.",
+    "aspects": [
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Mantiene abierto su canal de comunicación en Teams"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-067",
+    "raw_text": "A veces es puntual y a veces llega 15 minutos tarde.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "A veces es puntual y a veces llega 15 minutos tarde"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SAME_ASPECT_CONTRADICTION"]
+  },
+  {
+    "comment_id": "GOLD-DEV-068",
+    "raw_text": "Tiene un dominio del tema aceptable pero la evaluación es muy estricta.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "dominio del tema aceptable"
+      },
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "evaluacion es muy estricta"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-069",
+    "raw_text": "Promueve la investigación y el autoaprendizaje continuo.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Promueve la investigación y el autoaprendizaje continuo"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-DEV-070",
+    "raw_text": "Un docente impecable en todo sentido, la mejor asignatura del semestre.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "la mejor asignatura del semestre"
+      },
+      {
+        "aspect": "trato",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Un docente impecable en todo sentido"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  }
+]

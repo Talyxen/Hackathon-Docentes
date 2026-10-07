@@ -1,0 +1,682 @@
+[
+  {
+    "comment_id": "GOLD-TEST-001",
+    "raw_text": "El profesor domina el tema a la perfección pero su método de enseñanza es anticuado.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "POSITIVE",
+        "evidence_span": "domina el tema a la perfección"
+      },
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "método de enseñanza es anticuado"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-002",
+    "raw_text": "Sí, claro... 'puntualisimo', llega cuando ya se va a acabar el bloque.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "llega cuando ya se va a acabar el bloque"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-TEST-003",
+    "raw_text": "Siempre está en su oficina listo para resolver cualquier duda que surja.",
+    "aspects": [
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Siempre está en su oficina listo para resolver cualquier duda"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-004",
+    "raw_text": "Califica los parciales de forma muy justa y nos entrega retroalimentación por escrito.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Califica los parciales de forma muy justa y nos entrega retroalimentación"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-005",
+    "raw_text": "A veces es respetuoso y a veces insulta el trabajo de los grupos.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "A veces es respetuoso y a veces insulta"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SAME_ASPECT_CONTRADICTION"]
+  },
+  {
+    "comment_id": "GOLD-TEST-006",
+    "raw_text": "Explica con mucha paciencia pero nunca cumple las fechas de parciales programadas.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Explica con mucha paciencia"
+      },
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "nunca cumple las fechas de parciales programadas"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-007",
+    "raw_text": "Un 'ejemplo' de pedagogía... se pasa la clase contando historias personales.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "se pasa la clase contando historias personales"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-TEST-008",
+    "raw_text": "El material de apoyo subido al sistema es excelente y muy completo.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "El material de apoyo subido al sistema es excelente"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-009",
+    "raw_text": "Llega siempre a las 8:00 AM exactas y no permite interrupciones.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Llega siempre a las 8:00 AM exactas"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-010",
+    "raw_text": "Trato muy amable y cercano con los estudiantes de la facultad.",
+    "aspects": [
+      {
+        "aspect": "trato",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Trato muy amable y cercano"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-011",
+    "raw_text": "Las explicaciones son confusas y la guía del taller no coincide con la clase.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Las explicaciones son confusas"
+      },
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "la guía del taller no coincide con la clase"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-012",
+    "raw_text": "Excelente dominio temático, responde hasta las preguntas teóricas más complejas.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Excelente dominio temático, responde hasta las preguntas teóricas más complejas"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-013",
+    "raw_text": "Qué 'maravillosa' organización del curso... cambió el syllabus cuatro veces.",
+    "aspects": [
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "cambió el syllabus cuatro veces"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-TEST-014",
+    "raw_text": "Es muy atento en la atención de dudas por correo electrónico.",
+    "aspects": [
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Es muy atento en la atención de dudas por correo electrónico"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-015",
+    "raw_text": "Criterios de evaluación totalmente oscuros e inexplicables.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Criterios de evaluación totalmente oscuros e inexplicables"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-016",
+    "raw_text": "Resuelve los ejercicios en el tablero paso a paso con mucha claridad.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Resuelve los ejercicios en el tablero paso a paso con mucha claridad"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-017",
+    "raw_text": "Llega muy tarde pero la clase es muy entretenida.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Llega muy tarde"
+      },
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "la clase es muy entretenida"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-018",
+    "raw_text": "Se nota la falta de preparación antes de entrar al salón.",
+    "aspects": [
+      {
+        "aspect": "organizacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "Se nota la falta de preparación"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-019",
+    "raw_text": "Sabe mucho pero su trato es frío y distante.",
+    "aspects": [
+      {
+        "aspect": "dominio",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Sabe mucho"
+      },
+      {
+        "aspect": "trato",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "su trato es frío y distante"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-020",
+    "raw_text": "Super 'rápido' para calificar... pasaron tres meses sin saber una nota.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "pasaron tres meses sin saber una nota"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["SARCOSM_IRONY"]
+  },
+  {
+    "comment_id": "GOLD-TEST-021",
+    "raw_text": "Fomenta la participación activa de todos los estudiantes en los debates.",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Fomenta la participación activa"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-022",
+    "raw_text": "Es muy exigente pero muy justo con la calificación de los talleres.",
+    "aspects": [
+      {
+        "aspect": "evaluacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "muy justo con la calificación de los talleres"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-023",
+    "raw_text": "No se sabe si el tema se entendió o no, pasa volando por las diapositivas.",
+    "aspects": [
+      {
+        "aspect": "claridad",
+        "sentiment": "NEGATIVE",
+        "evidence_span": "pasa volando por las diapositivas"
+      }
+    ],
+    "requires_review": true,
+    "review_reasons": ["LOW_CONFIDENCE"]
+  },
+  {
+    "comment_id": "GOLD-TEST-024",
+    "raw_text": "Puntual para empezar la clase y muy organizado con los tiempos.",
+    "aspects": [
+      {
+        "aspect": "puntualidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Puntual para empezar la clase"
+      },
+      {
+        "aspect": "organizacion",
+        "sentiment": "POSITIVE",
+        "evidence_span": "muy organizado con los tiempos"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-025",
+    "raw_text": "Siempre dispuesto a solucionar problemas fuera del horario de clases.",
+    "aspects": [
+      {
+        "aspect": "disponibilidad",
+        "sentiment": "POSITIVE",
+        "evidence_span": "Siempre dispuesto a solucionar problemas fuera del horario"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-026",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-027",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-028",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-029",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-030",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-031",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-032",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-033",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-034",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-035",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-036",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-037",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-038",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-039",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-040",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-041",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-042",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-043",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-044",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-045",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-046",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-047",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-048",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-049",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  },
+  {
+    "comment_id": "GOLD-TEST-050",
+    "raw_text": "Comentario de prueba del usuario (Reservado para personalización de prueba).",
+    "aspects": [
+      {
+        "aspect": "metodologia",
+        "sentiment": "NEUTRAL",
+        "evidence_span": "Comentario de prueba"
+      }
+    ],
+    "requires_review": false,
+    "review_reasons": []
+  }
+]
