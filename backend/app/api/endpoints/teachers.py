@@ -7,6 +7,8 @@ from app.db.models import Teacher
 from app.db.schemas import TeacherScoreResponse, ComparativeResponse
 from app.services.scoring_engine import compute_teacher_score, calculate_global_batch_priors
 
+from app.services.seed import seed_demo_data_if_empty
+
 router = APIRouter()
 
 @router.get("/teachers", response_model=List[TeacherScoreResponse], summary="Obtener Todos los Docentes con Score Calculado Dinámicamente")
@@ -15,8 +17,12 @@ def get_teachers(
     batch_id: Optional[str] = None,
     db: Session = Depends(get_db)
 ):
+    if db.query(Teacher).count() == 0:
+        seed_demo_data_if_empty(db)
+        
     global_priors = calculate_global_batch_priors(db, batch_id)
     teachers = db.query(Teacher).all()
+
 
     scores = []
     for t in teachers:

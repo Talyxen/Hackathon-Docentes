@@ -4,8 +4,17 @@ from app.core.config import settings
 from app.core.database import Base, engine
 from app.api.endpoints import health, upload, comments, review, teachers, recommendations, report, stats
 
-# Crear tablas en SQLite al iniciar
+# Crear tablas en SQLite al iniciar y sembrar datos iniciales si está vacía
 Base.metadata.create_all(bind=engine)
+
+from app.core.database import SessionLocal
+from app.services.seed import seed_demo_data_if_empty
+try:
+    with SessionLocal() as db:
+        seed_demo_data_if_empty(db)
+except Exception as e:
+    print(f"Startup seed notice: {e}")
+
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
